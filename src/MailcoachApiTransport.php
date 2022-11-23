@@ -94,6 +94,6 @@ class MailcoachApiTransport extends AbstractApiTransport
 
     public function __toString(): string
     {
-        return "mailcoach+api://https://mailcoach.app";
+        return 'mailcoach+api://https://mailcoach.app';
     }
 }
