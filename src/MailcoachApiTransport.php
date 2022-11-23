@@ -13,7 +13,6 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class MailcoachApiTransport extends AbstractApiTransport
 {
-
     public function __construct(string $key, HttpClientInterface $client = null, EventDispatcherInterface $dispatcher = null, LoggerInterface $logger = null)
     {
         $this->key = $key;
