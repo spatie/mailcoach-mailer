@@ -4,12 +4,8 @@ namespace Spatie\MailcoachMailer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Mailer\Bridge\Postmark\Transport\MessageStreamHeader;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Exception\HttpTransportException;
-use Symfony\Component\Mailer\Exception\TransportException;
-use Symfony\Component\Mailer\Header\MetadataHeader;
-use Symfony\Component\Mailer\Header\TagHeader;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\AbstractApiTransport;
 use Symfony\Component\Mime\Email;
