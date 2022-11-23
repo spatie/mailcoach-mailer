@@ -30,7 +30,7 @@ class MailcoachApiTransport extends AbstractApiTransport
         $response = $this->client->request('POST', "https://{$this->host}/api/transactional-mails/send-raw", [
             'headers' => [
                 'Accept' => 'application/json',
-                'X-Postmark-Server-Token' => $this->key,
+                'Authorization' => "Bearer {$this->key}",
             ],
             'json' => $this->getPayload($email, $envelope),
         ]);
