@@ -1,11 +1,12 @@
 {
-    "name": "spatie/mailcoach-transport",
+    "name": "spatie/mailcoach-mailer",
+    "type": "symfony-mailer-bridge",
     "description": "The Mailcoach transport for Symfony Mail",
     "keywords": [
         "spatie",
-        "mailcoach-transport"
+        "mailcoach-mailer"
     ],
-    "homepage": "https://github.com/spatie/mailcoach-transport",
+    "homepage": "https://mailcoach.app",
     "license": "MIT",
     "authors": [
         {
@@ -15,7 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.1"
+        "php": "^8.1",
+        "symfony/mailer": "^6.0"
     },
     "require-dev": {
         "laravel/pint": "^1.2",
@@ -24,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\MailcoachTransport\\": "src"
+            "Spatie\\MailcoachMailer\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\MailcoachTransport\\Tests\\": "tests"
+            "Spatie\\MailcoachMailer\\Tests\\": "tests"
         }
     },
     "scripts": {

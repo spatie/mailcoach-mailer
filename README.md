@@ -3,15 +3,15 @@
 
 # The Mailcoach transport for Symfony Mail
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/mailcoach-transport.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-transport)
-[![Tests](https://github.com/spatie/mailcoach-transport/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/spatie/mailcoach-transport/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/mailcoach-transport.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-transport)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/mailcoach-mailer.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-mailer)
+[![Tests](https://github.com/spatie/mailcoach-mailer/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/spatie/mailcoach-mailer/actions/workflows/run-tests.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/mailcoach-mailer.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-mailer)
 
 This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/mailcoach-transport.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/mailcoach-transport)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/mailcoach-mailer.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/mailcoach-mailer)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
@@ -22,13 +22,13 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require spatie/mailcoach-transport
+composer require spatie/mailcoach-mailer
 ```
 
 ## Usage
 
 ```php
-$skeleton = new Spatie\MailcoachTransport();
+$skeleton = new Spatie\MailcoachMailer();
 echo $skeleton->echoPhrase('Hello, Spatie!');
 ```
 
