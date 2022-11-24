@@ -4,6 +4,7 @@ namespace Spatie\MailcoachMailer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
+use Spatie\MailcoachMailer\Exceptions\NoHostSet;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Exception\HttpTransportException;
 use Symfony\Component\Mailer\SentMessage;
@@ -17,39 +18,46 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class MailcoachApiTransport extends AbstractApiTransport
 {
     public function __construct(
-        protected string $key,
-        HttpClientInterface $client = null,
+        protected string         $apiToken,
+        HttpClientInterface      $client = null,
         EventDispatcherInterface $dispatcher = null,
-        LoggerInterface $logger = null
+        LoggerInterface          $logger = null
     ) {
         parent::__construct($client, $dispatcher, $logger);
     }
 
-    protected function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope): ResponseInterface
-    {
-        $response = $this->client->request('POST', "https://{$this->host}/api/transactional-mails/send-raw", [
+    protected function doSendApi(
+        SentMessage $sentMessage,
+        Email $email,
+        Envelope $envelope
+    ): ResponseInterface {
+        $payload = $this->getPayload($email, $envelope);
+
+        if (! $this->host)
+        {
+            throw NoHostSet::make();
+        }
+
+        $response = $this->client->request('POST', "https://{$this->host}/api/transactional-mails/send", [
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => "Bearer {$this->key}",
+                'Authorization' => "Bearer {$this->apiToken}",
             ],
-            'json' => $this->getPayload($email, $envelope),
+            'json' => $payload,
         ]);
 
         try {
             $statusCode = $response->getStatusCode();
-            $result = $response->toArray(false);
         } catch (DecodingExceptionInterface) {
-            throw new HttpTransportException("Unable to send an email: {$response->getContent(false)} (code {$statusCode}).", $response);
+            throw new HttpTransportException("Unable to send an email to {$payload['to']}.", $response);
         } catch (TransportExceptionInterface $exception) {
-            throw new HttpTransportException('Could not reach the remote Postmark server.', $response, 0, $exception);
+            throw new HttpTransportException('Could not reach the remote Mailcoach server.', $response, 0, $exception);
         }
 
-        if (200 !== $statusCode) {
-            throw new HttpTransportException("Unable to send an email: {$result['Message']} (code {$result['ErrorCode']}).", $response);
+        if (! in_array($statusCode, [200, 204])) {
+            throw new HttpTransportException("Unable to send an email to {$payload['to']} (code {$statusCode}).", $response);
         }
-
-        $sentMessage->setMessageId($result['MessageID']);
-
+ ;
         return $response;
     }
 
@@ -62,8 +70,8 @@ class MailcoachApiTransport extends AbstractApiTransport
             'bcc' => implode(',', $this->stringifyAddresses($email->getBcc())),
             'replyTo' => implode(',', $this->stringifyAddresses($email->getReplyTo())),
             'subject' => $email->getSubject(),
-            'textBody' => $email->getTextBody(),
-            'htmlBody' => $email->getHtmlBody(),
+            'text' => $email->getTextBody(),
+            'html' => $email->getHtmlBody(),
             'attachments' => $this->getAttachments($email),
         ];
     }
@@ -94,6 +102,6 @@ class MailcoachApiTransport extends AbstractApiTransport
 
     public function __toString(): string
     {
-        return 'mailcoach+api://https://mailcoach.app';
+        return "mailcoach+api://{$this->host}";
     }
 }

@@ -15,10 +15,8 @@ class MailcoachTransportFactory extends AbstractTransportFactory
 
     public function create(Dsn $dsn): TransportInterface
     {
-        $user = $this->getUser($dsn);
-
         $transport = (new MailcoachApiTransport(
-            $user,
+            $dsn->getOption('token'),
             $this->client,
             $this->dispatcher,
             $this->logger)
