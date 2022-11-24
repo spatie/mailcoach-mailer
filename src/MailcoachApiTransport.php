@@ -18,10 +18,10 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class MailcoachApiTransport extends AbstractApiTransport
 {
     public function __construct(
-        protected string         $apiToken,
-        HttpClientInterface      $client = null,
+        protected string $apiToken,
+        HttpClientInterface $client = null,
         EventDispatcherInterface $dispatcher = null,
-        LoggerInterface          $logger = null
+        LoggerInterface $logger = null
     ) {
         parent::__construct($client, $dispatcher, $logger);
     }
@@ -33,8 +33,7 @@ class MailcoachApiTransport extends AbstractApiTransport
     ): ResponseInterface {
         $payload = $this->getPayload($email, $envelope);
 
-        if (! $this->host)
-        {
+        if (! $this->host) {
             throw NoHostSet::make();
         }
 

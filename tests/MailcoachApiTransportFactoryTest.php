@@ -4,7 +4,7 @@ use Spatie\MailcoachMailer\MailcoachApiTransport;
 use Spatie\MailcoachMailer\MailcoachTransportFactory;
 use Symfony\Component\Mailer\Transport\Dsn;
 
-it('can create a transport', function() {
+it('can create a transport', function () {
     $factory = (new MailcoachTransportFactory());
 
     $dsn = new Dsn('https', 'domain.mailcoach.app', options: ['token' => 'fake-token']);

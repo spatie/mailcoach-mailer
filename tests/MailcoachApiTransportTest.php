@@ -4,7 +4,6 @@ use Spatie\MailcoachMailer\Exceptions\NoHostSet;
 use Spatie\MailcoachMailer\MailcoachApiTransport;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
-use Symfony\Component\Mailer\Bridge\Postmark\Transport\PostmarkApiTransport;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
@@ -13,10 +12,10 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 it('can be converted to string', function () {
     $transport = (new MailcoachApiTransport('dummy-token'))->setHost('domain.mailcoach.app');
 
-    expect((string)$transport)->toBe('mailcoach+api://domain.mailcoach.app');
+    expect((string) $transport)->toBe('mailcoach+api://domain.mailcoach.app');
 });
 
-it('can send an email', function() {
+it('can send an email', function () {
     $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
         expect($method)->toBe('POST');
         expect($url)->toBe('https://domain.mailcoach.app/api/transactional-mails/send');
@@ -49,7 +48,7 @@ it('can send an email', function() {
     expect($response->getMessageId())->toBeString();
 });
 
-it('will throw an exception if the host is not set', function() {
+it('will throw an exception if the host is not set', function () {
     $transport = (new MailcoachApiTransport('fake-api-token'));
 
     $mail = (new Email())
@@ -58,5 +57,4 @@ it('will throw an exception if the host is not set', function() {
         ->text('The text content');
 
     $transport->send($mail);
-
 })->throws(NoHostSet::class);
