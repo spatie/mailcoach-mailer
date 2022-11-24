@@ -5,6 +5,7 @@ namespace Spatie\MailcoachMailer;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Spatie\MailcoachMailer\Exceptions\NoHostSet;
+use Spatie\MailcoachMailer\Exceptions\NotAllowedToSendMail;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Exception\HttpTransportException;
 use Symfony\Component\Mailer\SentMessage;
@@ -18,32 +19,37 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class MailcoachApiTransport extends AbstractApiTransport
 {
     public function __construct(
-        protected string $apiToken,
-        HttpClientInterface $client = null,
+        protected string         $apiToken,
+        HttpClientInterface      $client = null,
         EventDispatcherInterface $dispatcher = null,
-        LoggerInterface $logger = null
-    ) {
+        LoggerInterface          $logger = null
+    )
+    {
         parent::__construct($client, $dispatcher, $logger);
     }
 
     protected function doSendApi(
         SentMessage $sentMessage,
-        Email $email,
-        Envelope $envelope
-    ): ResponseInterface {
+        Email       $email,
+        Envelope    $envelope
+    ): ResponseInterface
+    {
         $payload = $this->getPayload($email, $envelope);
 
-        if (! $this->host) {
+        if (!$this->host) {
             throw NoHostSet::make();
         }
 
-        $response = $this->client->request('POST', "https://{$this->host}/api/transactional-mails/send", [
-            'headers' => [
-                'Accept' => 'application/json',
-                'Authorization' => "Bearer {$this->apiToken}",
-            ],
-            'json' => $payload,
-        ]);
+        $response = $this->client->request(
+            'POST',
+            "https://{$this->host}/api/transactional-mails/send",
+            [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Authorization' => "Bearer {$this->apiToken}",
+                ],
+                'json' => $payload,
+            ]);
 
         try {
             $statusCode = $response->getStatusCode();
@@ -53,7 +59,11 @@ class MailcoachApiTransport extends AbstractApiTransport
             throw new HttpTransportException('Could not reach the remote Mailcoach server.', $response, 0, $exception);
         }
 
-        if (! in_array($statusCode, [200, 204])) {
+        if (!in_array($statusCode, [200, 204])) {
+            if ($statusCode === 403) {
+                throw NotAllowedToSendMail::make($response->getContent(false));
+            }
+
             throw new HttpTransportException("Unable to send an email to {$payload['to']} (code {$statusCode}).", $response);
         }
 
@@ -90,7 +100,7 @@ class MailcoachApiTransport extends AbstractApiTransport
             ];
 
             if ('inline' === $disposition) {
-                $att['ContentID'] = 'cid:'.$filename;
+                $att['ContentID'] = 'cid:' . $filename;
             }
 
             $attachments[] = $att;
