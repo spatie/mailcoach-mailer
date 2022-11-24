@@ -57,7 +57,7 @@ class MailcoachApiTransport extends AbstractApiTransport
         if (! in_array($statusCode, [200, 204])) {
             throw new HttpTransportException("Unable to send an email to {$payload['to']} (code {$statusCode}).", $response);
         }
- ;
+
         return $response;
     }
 
