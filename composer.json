@@ -1,7 +1,7 @@
 {
     "name": "spatie/mailcoach-mailer",
     "type": "symfony-mailer-bridge",
-    "description": "The Mailcoach transport for Symfony Mail",
+    "description": "The Mailcoach transport for Symfony Mailer",
     "keywords": [
         "spatie",
         "mailcoach-mailer"

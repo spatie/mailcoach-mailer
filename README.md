@@ -1,7 +1,7 @@
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
 
-# The Mailcoach transport for Symfony Mail
+# The Mailcoach transport for Symfony Mailer
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/mailcoach-mailer.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-mailer)
 [![Tests](https://github.com/spatie/mailcoach-mailer/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/spatie/mailcoach-mailer/actions/workflows/run-tests.yml)
@@ -54,6 +54,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
+
+This package contains modified code from [Symfony's Postmark mailer](https://github.com/symfony/postmark-mailer).
 
 ## License
 
