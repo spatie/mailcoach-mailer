@@ -21,7 +21,7 @@ it('can send an email', function() {
         expect($method)->toBe('POST');
         expect($url)->toBe('https://domain.mailcoach.app/api/transactional-mails/send');
 
-        expect(strtolower($options['headers'][1]))->toContain(strtolower('fake-api-token'));
+        expect($options['headers'][1])->toContain('fake-api-token');
 
         $body = json_decode($options['body'], true);
 
