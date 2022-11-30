@@ -6,6 +6,8 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use Spatie\MailcoachMailer\Exceptions\NoHostSet;
 use Spatie\MailcoachMailer\Exceptions\NotAllowedToSendMail;
+use Spatie\MailcoachMailer\Headers\ReplacementHeader;
+use Spatie\MailcoachMailer\Headers\TransactionalMailHeader;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Exception\HttpTransportException;
 use Symfony\Component\Mailer\SentMessage;
@@ -70,7 +72,7 @@ class MailcoachApiTransport extends AbstractApiTransport
 
     protected function getPayload(Email $email, Envelope $envelope): array
     {
-        return [
+        $payload = [
             'from' => $envelope->getSender()->toString(),
             'to' => implode(',', $this->stringifyAddresses($this->getRecipients($email, $envelope))),
             'cc' => implode(',', $this->stringifyAddresses($email->getCc())),
@@ -81,6 +83,18 @@ class MailcoachApiTransport extends AbstractApiTransport
             'html' => $email->getHtmlBody(),
             'attachments' => $this->getAttachments($email),
         ];
+
+        foreach ($email->getHeaders()->all() as $name => $header) {
+            if ($header instanceof TransactionalMailHeader) {
+                $payload['mail_name'] = $header->getValue();
+            }
+
+            if ($header instanceof ReplacementHeader) {
+                $payload['replacements'][$header->getKey()] = $header->getValue();
+            }
+        }
+
+        return $payload;
     }
 
     protected function getAttachments(Email $email): array
