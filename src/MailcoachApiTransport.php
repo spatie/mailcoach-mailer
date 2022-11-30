@@ -92,13 +92,13 @@ class MailcoachApiTransport extends AbstractApiTransport
             $disposition = $headers->getHeaderBody('Content-Disposition');
 
             $att = [
-                'Name' => $filename,
-                'Content' => $attachment->bodyToString(),
-                'ContentType' => $headers->get('Content-Type')->getBody(),
+                'name' => $filename,
+                'content' => $attachment->bodyToString(),
+                'content_type' => $headers->get('Content-Type')->getBody(),
             ];
 
             if ('inline' === $disposition) {
-                $att['ContentID'] = 'cid:'.$filename;
+                $att['content_id'] = 'cid:'.$filename;
             }
 
             $attachments[] = $att;
