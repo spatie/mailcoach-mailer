@@ -73,6 +73,28 @@ it('can process the transactional mail header', function () {
     $transport->send($mail);
 });
 
+it('throws when trying to define it twice', function () {
+    $client = new MockHttpClient(function (): ResponseInterface {
+        return new MockResponse('', ['http_code' => 204]);
+    });
+
+    $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
+
+    $mail = (new Email())
+        ->subject('My subject')
+        ->to(new Address('to@example.com', 'To name'))
+        ->from(new Address('from@example.com', 'From name'))
+        ->text('The text content')
+        ->html('The html content');
+
+    $mail->getHeaders()->add(new TransactionalMailHeader('my_template'));
+    $mail->getHeaders()->add(new TransactionalMailHeader('another_template'));
+
+    $this->expectExceptionMessage('Mailcoach only allows a single transactional mail to be defined.');
+
+    $transport->send($mail);
+});
+
 it('can pass through replacements', function () {
     $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
         $body = json_decode($options['body'], true);

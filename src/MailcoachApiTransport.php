@@ -10,6 +10,7 @@ use Spatie\MailcoachMailer\Headers\ReplacementHeader;
 use Spatie\MailcoachMailer\Headers\TransactionalMailHeader;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Exception\HttpTransportException;
+use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\AbstractApiTransport;
 use Symfony\Component\Mime\Email;
@@ -86,6 +87,10 @@ class MailcoachApiTransport extends AbstractApiTransport
 
         foreach ($email->getHeaders()->all() as $name => $header) {
             if ($header instanceof TransactionalMailHeader) {
+                if (isset($payload['mail_name'])) {
+                    throw new TransportException('Mailcoach only allows a single transactional mail to be defined.');
+                }
+
                 $payload['mail_name'] = $header->getValue();
             }
 
