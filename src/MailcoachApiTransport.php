@@ -78,7 +78,7 @@ class MailcoachApiTransport extends AbstractApiTransport
             'to' => implode(',', $this->stringifyAddresses($this->getRecipients($email, $envelope))),
             'cc' => implode(',', $this->stringifyAddresses($email->getCc())),
             'bcc' => implode(',', $this->stringifyAddresses($email->getBcc())),
-            'replyTo' => implode(',', $this->stringifyAddresses($email->getReplyTo())),
+            'reply_to' => implode(',', $this->stringifyAddresses($email->getReplyTo())),
             'subject' => $email->getSubject(),
             'text' => $email->getTextBody(),
             'html' => $email->getHtmlBody(),
