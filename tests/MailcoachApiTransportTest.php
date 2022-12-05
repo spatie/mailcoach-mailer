@@ -99,8 +99,8 @@ it('can pass through replacements', function () {
     $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
         $body = json_decode($options['body'], true);
 
-        expect($body['replacements']['first_name'])->toBe('Rias');
-        expect($body['replacements']['last_name'])->toBe('Van der Veken');
+        expect($body['replacements']['first_name'])->toBe('John');
+        expect($body['replacements']['last_name'])->toBe('Doe');
 
         return new MockResponse('', ['http_code' => 204]);
     });
@@ -114,8 +114,8 @@ it('can pass through replacements', function () {
         ->text('The text content')
         ->html('The html content');
 
-    $mail->getHeaders()->add(new ReplacementHeader('first_name', 'Rias'));
-    $mail->getHeaders()->add(new ReplacementHeader('last_name', 'Van der Veken'));
+    $mail->getHeaders()->add(new ReplacementHeader('first_name', 'John'));
+    $mail->getHeaders()->add(new ReplacementHeader('last_name', 'Doe'));
 
     $transport->send($mail);
 });
