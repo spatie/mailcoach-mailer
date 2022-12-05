@@ -4,6 +4,7 @@ namespace Spatie\MailcoachMailer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
+use Spatie\MailcoachMailer\Exceptions\EmailNotValid;
 use Spatie\MailcoachMailer\Exceptions\NoHostSet;
 use Spatie\MailcoachMailer\Exceptions\NotAllowedToSendMail;
 use Spatie\MailcoachMailer\Headers\ReplacementHeader;
@@ -63,6 +64,10 @@ class MailcoachApiTransport extends AbstractApiTransport
         if (! in_array($statusCode, [200, 204])) {
             if ($statusCode === 403) {
                 throw NotAllowedToSendMail::make($response->getContent(false));
+            }
+
+            if ($statusCode === 422) {
+                throw EmailNotValid::make($response->getContent(false));
             }
 
             throw new HttpTransportException("Unable to send an email to {$payload['to']} (code {$statusCode}).", $response);
