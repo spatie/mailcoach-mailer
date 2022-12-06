@@ -110,22 +110,23 @@ class MailcoachApiTransport extends AbstractApiTransport
     protected function getAttachments(Email $email): array
     {
         $attachments = [];
+
         foreach ($email->getAttachments() as $attachment) {
             $headers = $attachment->getPreparedHeaders();
             $filename = $headers->getHeaderParameter('Content-Disposition', 'filename');
             $disposition = $headers->getHeaderBody('Content-Disposition');
 
-            $att = [
+            $attachment = [
                 'name' => $filename,
                 'content' => $attachment->bodyToString(),
                 'content_type' => $headers->get('Content-Type')->getBody(),
             ];
 
             if ('inline' === $disposition) {
-                $att['content_id'] = 'cid:'.$filename;
+                $attachment['content_id'] = 'cid:'.$filename;
             }
 
-            $attachments[] = $att;
+            $attachments[] = $attachment;
         }
 
         return $attachments;
