@@ -24,7 +24,7 @@ composer require spatie/mailcoach-mailer
 
 ## Documentation
 
-You can find all documentation on [the Mailcoach website](https://mailcoach.app/docs)
+You can find all documentation on [the Mailcoach website](https://mailcoach.app/docs/cloud/using-mailcoach/transactional-mails/using-symfony-mailer)
 
 ## Tests
 
