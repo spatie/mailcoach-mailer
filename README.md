@@ -6,6 +6,8 @@
 
 This package contains a transport class for [Symfony Mailer](https://symfony.com/doc/current/mailer.html) to send transactional mails through [Mailcoach](https://mailcoach.app).
 
+For Laravel, take a look at [the Laravel specific package](https://github.com/spatie/laravel-mailcoach-mailer).
+
 ## Support us
 
 [<img src="https://github-ads.s3.eu-central-1.amazonaws.com/mailcoach-mailer.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/mailcoach-mailer)
