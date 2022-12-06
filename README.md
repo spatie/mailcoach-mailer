@@ -22,14 +22,11 @@ You can install the package via composer:
 composer require spatie/mailcoach-mailer
 ```
 
-## Usage
+## Documentation
 
-```php
-$skeleton = new Spatie\MailcoachMailer();
-echo $skeleton->echoPhrase('Hello, Spatie!');
-```
+You can find all documentation on [the Mailcoach website](https://mailcoach.app/docs)
 
-## Testing
+## Tests
 
 ```bash
 composer test
