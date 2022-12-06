@@ -19,7 +19,7 @@ class MailcoachTransportFactory extends AbstractTransportFactory
             $dsn->getOption('token'),
             $this->client,
             $this->dispatcher,
-            $this->logger
+            $this->logger,
         );
 
         $transport
