@@ -1,6 +1,3 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 # The Mailcoach transport for Symfony Mailer
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/mailcoach-mailer.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-mailer)
