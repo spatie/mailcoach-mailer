@@ -6,7 +6,7 @@ use Symfony\Component\Mime\Header\UnstructuredHeader;
 
 class ReplacementHeader extends UnstructuredHeader
 {
-    private string $key;
+    protected string $key;
 
     public function __construct(string $key, string $value)
     {
