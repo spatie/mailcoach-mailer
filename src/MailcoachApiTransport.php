@@ -34,7 +34,7 @@ class MailcoachApiTransport extends AbstractApiTransport
     protected function doSendApi(
         SentMessage $sentMessage,
         Email $email,
-        Envelope $envelope
+        Envelope $envelope,
     ): ResponseInterface {
         $payload = $this->getPayload($email, $envelope);
 

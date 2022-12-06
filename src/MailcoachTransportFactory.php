@@ -15,12 +15,16 @@ class MailcoachTransportFactory extends AbstractTransportFactory
 
     public function create(Dsn $dsn): TransportInterface
     {
-        $transport = (new MailcoachApiTransport(
+        $transport = new MailcoachApiTransport(
             $dsn->getOption('token'),
             $this->client,
             $this->dispatcher,
-            $this->logger)
-        )->setHost($dsn->getHost())->setPort($dsn->getPort());
+            $this->logger
+        );
+
+        $transport
+            ->setHost($dsn->getHost())
+            ->setPort($dsn->getPort());
 
         return $transport;
     }
