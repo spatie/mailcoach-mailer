@@ -4,7 +4,7 @@
 [![Tests](https://github.com/spatie/mailcoach-mailer/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/spatie/mailcoach-mailer/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/mailcoach-mailer.svg?style=flat-square)](https://packagist.org/packages/spatie/mailcoach-mailer)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+This package contains a transport class for [Symfony Mailer](https://symfony.com/doc/current/mailer.html) to send transactional mails through [Mailcoach](https://mailcoach.app).
 
 ## Support us
 
