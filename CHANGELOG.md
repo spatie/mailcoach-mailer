@@ -2,6 +2,12 @@
 
 All notable changes to `mailcoach-mailer` will be documented in this file.
 
+## 1.1.0 - 2024-02-20
+
+* Add a way to pass the `mailer` to the API request
+
+**Full Changelog**: https://github.com/spatie/mailcoach-mailer/compare/1.0.1...1.1.0
+
 ## 1.0.1 - 2023-12-18
 
 ### What's Changed
