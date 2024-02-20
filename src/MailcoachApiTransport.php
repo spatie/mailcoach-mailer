@@ -25,9 +25,9 @@ class MailcoachApiTransport extends AbstractApiTransport
 {
     public function __construct(
         protected string $apiToken,
-        HttpClientInterface $client = null,
-        EventDispatcherInterface $dispatcher = null,
-        LoggerInterface $logger = null
+        ?HttpClientInterface $client = null,
+        ?EventDispatcherInterface $dispatcher = null,
+        ?LoggerInterface $logger = null
     ) {
         parent::__construct($client, $dispatcher, $logger);
     }
@@ -127,7 +127,7 @@ class MailcoachApiTransport extends AbstractApiTransport
                 'content_type' => $headers->get('Content-Type')->getBody(),
             ];
 
-            if ('inline' === $disposition) {
+            if ($disposition === 'inline') {
                 $attachment['content_id'] = 'cid:'.$filename;
             }
 
