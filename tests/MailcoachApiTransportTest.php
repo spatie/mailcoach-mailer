@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\MailcoachMailer\Exceptions\NoHostSet;
+use Spatie\MailcoachMailer\Headers\MailerHeader;
 use Spatie\MailcoachMailer\Headers\ReplacementHeader;
 use Spatie\MailcoachMailer\Headers\TransactionalMailHeader;
 use Spatie\MailcoachMailer\MailcoachApiTransport;
@@ -69,6 +70,29 @@ it('can process the transactional mail header', function () {
         ->html('The html content');
 
     $mail->getHeaders()->add(new TransactionalMailHeader('my_template'));
+
+    $transport->send($mail);
+});
+
+it('can process the mailer header', function () {
+    $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
+        $body = json_decode($options['body'], true);
+
+        expect($body['mailer'])->toBe('transactional-mailer');
+
+        return new MockResponse('', ['http_code' => 204]);
+    });
+
+    $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
+
+    $mail = (new Email())
+        ->subject('My subject')
+        ->to(new Address('to@example.com', 'To name'))
+        ->from(new Address('from@example.com', 'From name'))
+        ->text('The text content')
+        ->html('The html content');
+
+    $mail->getHeaders()->add(new MailerHeader('transactional-mailer'));
 
     $transport->send($mail);
 });
