@@ -101,7 +101,7 @@ class MailcoachApiTransport extends AbstractApiTransport
             }
 
             if ($header instanceof ReplacementHeader) {
-                $payload['replacements'][$header->getKey()] = $header->getValue();
+                $payload['replacements'][$header->getKey()] = json_decode($header->getValue(), true);
             }
 
             if ($header instanceof MailerHeader) {

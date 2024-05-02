@@ -125,6 +125,7 @@ it('can pass through replacements', function () {
 
         expect($body['replacements']['first_name'])->toBe('John');
         expect($body['replacements']['last_name'])->toBe('Doe');
+        expect($body['replacements']['array'])->toBe(['foo', 'bar']);
 
         return new MockResponse('', ['http_code' => 204]);
     });
@@ -140,6 +141,7 @@ it('can pass through replacements', function () {
 
     $mail->getHeaders()->add(new ReplacementHeader('first_name', 'John'));
     $mail->getHeaders()->add(new ReplacementHeader('last_name', 'Doe'));
+    $mail->getHeaders()->add(new ReplacementHeader('array', ['foo', 'bar']));
 
     $transport->send($mail);
 });

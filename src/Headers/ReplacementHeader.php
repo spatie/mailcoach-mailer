@@ -8,11 +8,11 @@ class ReplacementHeader extends UnstructuredHeader
 {
     protected string $key;
 
-    public function __construct(string $key, string $value)
+    public function __construct(string $key, string|array $value)
     {
         $this->key = $key;
 
-        parent::__construct("X-Mailcoach-Replacement-{$key}", $value);
+        parent::__construct("X-Mailcoach-Replacement-{$key}", json_encode($value));
     }
 
     public function getKey(): string
