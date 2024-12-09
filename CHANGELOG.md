@@ -2,6 +2,19 @@
 
 All notable changes to `mailcoach-mailer` will be documented in this file.
 
+## 1.3.0 - 2024-12-09
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/spatie/mailcoach-mailer/pull/17
+* Add fake header and allow passing null value replacements by @francoism90 in https://github.com/spatie/mailcoach-mailer/pull/19
+
+### New Contributors
+
+* @francoism90 made their first contribution in https://github.com/spatie/mailcoach-mailer/pull/19
+
+**Full Changelog**: https://github.com/spatie/mailcoach-mailer/compare/1.2.0...1.3.0
+
 ## 1.2.0 - 2024-05-02
 
 ### What's Changed
