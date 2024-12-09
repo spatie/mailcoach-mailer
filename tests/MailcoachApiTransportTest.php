@@ -97,6 +97,29 @@ it('can process the mailer header', function () {
     $transport->send($mail);
 });
 
+it('can process the fake header', function () {
+    $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
+        $body = json_decode($options['body'], true);
+
+        expect($body['fake'])->toBe(true);
+
+        return new MockResponse('', ['http_code' => 204]);
+    });
+
+    $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
+
+    $mail = (new Email())
+        ->subject('My subject')
+        ->to(new Address('to@example.com', 'To name'))
+        ->from(new Address('from@example.com', 'From name'))
+        ->text('The text content')
+        ->html('The html content');
+
+    $mail->getHeaders()->add(new FakeHeader(true));
+
+    $transport->send($mail);
+});
+
 it('throws when trying to define it twice', function () {
     $client = new MockHttpClient(function (): ResponseInterface {
         return new MockResponse('', ['http_code' => 204]);
