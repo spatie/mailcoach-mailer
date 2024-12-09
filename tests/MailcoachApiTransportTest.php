@@ -116,7 +116,7 @@ it('can process the fake header', function () {
         ->text('The text content')
         ->html('The html content');
 
-    $mail->getHeaders()->add(new FakeHeader(true));
+    $mail->getHeaders()->add(new FakeHeader());
 
     $transport->send($mail);
 });
