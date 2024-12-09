@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Spatie\MailcoachMailer\Exceptions\EmailNotValid;
 use Spatie\MailcoachMailer\Exceptions\NoHostSet;
 use Spatie\MailcoachMailer\Exceptions\NotAllowedToSendMail;
+use Spatie\MailcoachMailer\Headers\FakeHeader;
 use Spatie\MailcoachMailer\Headers\MailerHeader;
 use Spatie\MailcoachMailer\Headers\ReplacementHeader;
 use Spatie\MailcoachMailer\Headers\TransactionalMailHeader;
@@ -106,6 +107,10 @@ class MailcoachApiTransport extends AbstractApiTransport
 
             if ($header instanceof MailerHeader) {
                 $payload['mailer'] = $header->getValue();
+            }
+
+            if ($header instanceof FakeHeader) {
+                $payload['fake'] = $header->getValue();
             }
         }
 
