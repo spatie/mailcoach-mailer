@@ -8,7 +8,7 @@ class ReplacementHeader extends UnstructuredHeader
 {
     protected string $key;
 
-    public function __construct(string $key, string|array $value)
+    public function __construct(string $key, string|array|null $value)
     {
         $this->key = $key;
 
