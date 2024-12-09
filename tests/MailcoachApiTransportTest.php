@@ -39,7 +39,7 @@ it('can send an email', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
@@ -63,7 +63,7 @@ it('can process the transactional mail header', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
@@ -86,7 +86,7 @@ it('can process the mailer header', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
@@ -109,14 +109,14 @@ it('can process the fake header', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
         ->text('The text content')
         ->html('The html content');
 
-    $mail->getHeaders()->add(new FakeHeader());
+    $mail->getHeaders()->add(new FakeHeader);
 
     $transport->send($mail);
 });
@@ -128,7 +128,7 @@ it('throws when trying to define it twice', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
@@ -156,7 +156,7 @@ it('can pass through replacements', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
@@ -173,7 +173,7 @@ it('can pass through replacements', function () {
 it('will throw an exception if the host is not set', function () {
     $transport = (new MailcoachApiTransport('fake-api-token'));
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
         ->text('The text content');
