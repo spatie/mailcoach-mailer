@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\MailcoachMailer\Exceptions\NoHostSet;
+use Spatie\MailcoachMailer\Headers\FakeHeader;
 use Spatie\MailcoachMailer\Headers\MailerHeader;
 use Spatie\MailcoachMailer\Headers\ReplacementHeader;
 use Spatie\MailcoachMailer\Headers\TransactionalMailHeader;
