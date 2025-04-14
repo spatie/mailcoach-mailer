@@ -52,6 +52,38 @@ it('can send an email', function () {
     expect($response->getMessageId())->toBeString();
 });
 
+it('can send a plaintext email', function () {
+    $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
+        expect($method)->toBe('POST');
+        expect($url)->toBe('https://domain.mailcoach.app/api/transactional-mails/send');
+
+        expect($options['headers'][1])->toContain('fake-api-token');
+
+        $body = json_decode($options['body'], true);
+
+        expect($body['from'])->toBe('"From name" <from@example.com>');
+        expect($body['to'])->toBe('"To name" <to@example.com>');
+        expect($body['subject'])->toBe('My subject');
+        expect($body['text'])->toBe('The text content');
+        expect($body['html'])->toBeNull();
+
+        return new MockResponse('', ['http_code' => 204]);
+    });
+
+    $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
+
+    $mail = (new Email())
+        ->subject('My subject')
+        ->to(new Address('to@example.com', 'To name'))
+        ->from(new Address('from@example.com', 'From name'))
+        ->text('The text content');
+
+    $response = $transport->send($mail);
+
+    expect($response)->toBeInstanceOf(SentMessage::class);
+    expect($response->getMessageId())->toBeString();
+});
+
 it('can process the transactional mail header', function () {
     $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
         $body = json_decode($options['body'], true);
@@ -102,7 +134,7 @@ it('can process the fake header', function () {
     $client = new MockHttpClient(function (string $method, string $url, array $options): ResponseInterface {
         $body = json_decode($options['body'], true);
 
-        expect($body['fake'])->toBe(true);
+        expect($body['fake'])->toBe('1');
 
         return new MockResponse('', ['http_code' => 204]);
     });
