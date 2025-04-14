@@ -72,7 +72,7 @@ it('can send a plaintext email', function () {
 
     $transport = (new MailcoachApiTransport('fake-api-token', $client))->setHost('domain.mailcoach.app');
 
-    $mail = (new Email())
+    $mail = (new Email)
         ->subject('My subject')
         ->to(new Address('to@example.com', 'To name'))
         ->from(new Address('from@example.com', 'From name'))
