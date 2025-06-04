@@ -26,7 +26,7 @@ composer require spatie/mailcoach-mailer
 
 ## Documentation
 
-You can find all documentation on [the Mailcoach website](https://mailcoach.app/docs/cloud/using-mailcoach/transactional-mails/using-symfony-mailer)
+You can find all documentation on [the Mailcoach website](https://www.mailcoach.app/resources/learn-mailcoach/features/transactional/#content-using-symfony-mailer)
 
 ## Tests
 
@@ -48,8 +48,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Freek Van der Herten](https://github.com/freekmurze)
-- [All Contributors](../../contributors)
+-   [Freek Van der Herten](https://github.com/freekmurze)
+-   [All Contributors](../../contributors)
 
 This package contains modified code from [Symfony's Postmark mailer](https://github.com/symfony/postmark-mailer).
 
