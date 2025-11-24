@@ -21,7 +21,6 @@
         "symfony/mailer": "^6.0 || ^7.0"
     },
     "require-dev": {
-        "laravel/pint": "^v1.22.0",
         "pestphp/pest": "^v3.8.1"
     },
     "autoload": {
