@@ -2,6 +2,16 @@
 
 All notable changes to `mailcoach-mailer` will be documented in this file.
 
+## 1.3.1 - 2026-02-09
+
+### What's Changed
+
+* Add Symfony 8 support (closes #30)
+* Require PHP 8.2+ (align with Pest v3 requirement)
+* Add PHP 8.3, 8.4, and 8.5 to CI matrix
+
+**Full Changelog**: https://github.com/spatie/mailcoach-mailer/compare/1.3.0...1.3.1
+
 ## 1.3.0 - 2024-12-09
 
 ### What's Changed
