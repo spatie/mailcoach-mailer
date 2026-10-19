@@ -2,6 +2,16 @@
 
 All notable changes to `mailcoach-mailer` will be documented in this file.
 
+## 1.4.0 - 2026-10-19
+
+### What’s Changed
+
+* Add optional `setApiBaseUrl()` and `api_base_url` DSN configuration for transactional mail requests, including internal HTTP services, ports, and path prefixes, in https://github.com/spatie/mailcoach-mailer/pull/37 (fixes #36).
+* Keep HTTPS unchanged by default, preserving the endpoint path, bearer token, email payload, and custom HTTP client compatibility.
+* Add regression coverage and configuration documentation, including guidance on using HTTP only on trusted networks.
+
+**Full Changelog**: https://github.com/spatie/mailcoach-mailer/compare/1.3.1...1.4.0
+
 ## 1.3.1 - 2026-02-09
 
 ### What's Changed
