@@ -24,7 +24,8 @@ class MailcoachTransportFactory extends AbstractTransportFactory
 
         $transport
             ->setHost($dsn->getHost())
-            ->setPort($dsn->getPort());
+            ->setPort($dsn->getPort())
+            ->setApiBaseUrl($dsn->getOption('api_base_url'));
 
         return $transport;
     }

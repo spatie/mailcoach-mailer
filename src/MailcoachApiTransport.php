@@ -24,6 +24,8 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class MailcoachApiTransport extends AbstractApiTransport
 {
+    protected ?string $apiBaseUrl = null;
+
     public function __construct(
         protected string $apiToken,
         ?HttpClientInterface $client = null,
@@ -33,6 +35,13 @@ class MailcoachApiTransport extends AbstractApiTransport
         parent::__construct($client, $dispatcher, $logger);
     }
 
+    public function setApiBaseUrl(?string $apiBaseUrl): static
+    {
+        $this->apiBaseUrl = $apiBaseUrl === null ? null : rtrim($apiBaseUrl, '/');
+
+        return $this;
+    }
+
     protected function doSendApi(
         SentMessage $sentMessage,
         Email $email,
@@ -40,13 +49,19 @@ class MailcoachApiTransport extends AbstractApiTransport
     ): ResponseInterface {
         $payload = $this->getPayload($email, $envelope);
 
-        if (! $this->host) {
-            throw NoHostSet::make();
+        $baseUrl = $this->apiBaseUrl;
+
+        if (! $baseUrl) {
+            if (! $this->host) {
+                throw NoHostSet::make();
+            }
+
+            $baseUrl = "https://{$this->host}";
         }
 
         $response = $this->client->request(
             'POST',
-            "https://{$this->host}/api/transactional-mails/send",
+            "{$baseUrl}/api/transactional-mails/send",
             [
                 'headers' => [
                     'Accept' => 'application/json',
