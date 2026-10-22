@@ -10,7 +10,7 @@ For Laravel, take a look at [the Laravel specific package](https://github.com/sp
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/mailcoach-mailer.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/mailcoach-mailer)
+[<img src="https://spatie.be/github-ad-image/mailcoach-mailer.jpg" width="419px" />](https://spatie.be/github-ad-click/mailcoach-mailer)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
